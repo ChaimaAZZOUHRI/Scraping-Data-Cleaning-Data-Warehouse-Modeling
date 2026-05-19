@@ -1,0 +1,73 @@
+# =========================
+# Python virtual environments
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# Python cache / compiled files
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# VS Code / editor files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Build / packaging
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Local databases / temp files
+# =========================
+*.sqlite
+*.db
+*.tmp
+*.temp
+
+# =========================
+# Selenium / webdriver leftovers
+# =========================
+chromedriver.exe
+geckodriver.exe
+
+# =========================
+# Optional generated data
+# Keep these commented if you WANT to upload your datasets
+# Uncomment if you want GitHub to ignore generated CSV outputs
+# =========================
+# data/bronze/
+# data/silver/
+# data/gold/

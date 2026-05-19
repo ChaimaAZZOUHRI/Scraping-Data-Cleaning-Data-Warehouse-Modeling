@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: avito_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  pipeline:
+   image: python:3.11-slim
+   container_name: avito_pipeline
+   working_dir: /app
+   volumes:
+    - .:/app
+   env_file:
+    - .env
+   depends_on:
+    postgres:
+      condition: service_healthy
+   command: >
+    sh -c "
+    pip install --default-timeout=300 --retries 15 --no-cache-dir -r requirements.txt &&
+    python pipeline/run_pipeline.py
+    "
+
+volumes:
+  postgres_data:
